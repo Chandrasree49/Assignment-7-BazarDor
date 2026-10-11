@@ -1,93 +1,41 @@
-# 🛒 বাজার দর (BazarDor)
+1.Project name-(BazarDor)
 
-বাজার দর (BazarDor) হলো একটি আধুনিক, গতিশীল এবং প্রতিক্রিয়াশীল ওয়েব অ্যাপ্লিকেশন যা বাংলাদেশের নিত্যপ্রয়োজনীয় পণ্যের দৈনন্দিন বাজার দর, মূল্য হ্রাস-বৃদ্ধি এবং দেশের প্রধান প্রধান পাইকারি ও খুচরা বাজারভিত্তিক বিস্তারিত বিশ্লেষণের নির্ভরযোগ্য তথ্য প্রদান করে।
+2.Short description:BazarDor is a modern, dynamic, and responsive web application that provides reliable information on the daily market prices of essential commodities in Bangladesh, price fluctuations, and detailed market-based analysis of major wholesale and retail markets across the country.
+The main goal of this platform is to deliver accurate information about price changes in various market commodities to buyers and sellers in simple and fluent Bengali. Users can explore the national average, minimum, and maximum prices, along with historical price trends for essential commodities such as rice, lentils, oil, vegetables, fish, and meat.
 
----
+3.Technologies Used
 
-## 🚀 লাইভ ডেমো ও প্রজেক্ট বিবরণ (Project Overview)
+- Next.js
+- TypeScript
+- Tailwind CSS
+- BetterAuth
+- React Hot Toast
+- Hind Siliguri
 
-বাজারের বিভিন্ন পণ্যের মূল্য পরিবর্তনের সঠিক তথ্য ক্রেতা এবং বিক্রেতাদের কাছে সহজ ও সাবলীল বাংলায় পৌঁছে দেওয়াই এই প্ল্যাটফর্মের মূল লক্ষ্য। চাল, ডাল, তেল, শাকসবজি, মাছ ও মাংসসহ নিত্যপণ্যের জাতীয় গড় দর, সর্বনিম্ন দর, সর্বোচ্চ দর এবং ঐতিহাসিক মূল্য পর্যালোচনা করা যায় এই প্ল্যাটফর্মে।
+4.5 Key Features of BazarDor
+1. Live Price Ticker & Category Navigation
+- An infinite scrolling marquee strip at the top of the website that displays each product’s emoji, name, current price, and percentage price change (▲/▼) in real time.
+- An attractive logo featuring the Bengali date, along with a navigation bar that highlights the active category.
+2. Top Price Risers, Fallers & Responsive Product Grid
+- Today's Price Risers ▲: Highlights the top six products with the largest price increases in the market using distinctive red badges.
+- Today's Price Fallers ▼: Highlights the top six products with the largest price decreases using distinctive green badges.
+- All Products Grid: A fully responsive grid layout for mobile, tablet, and desktop screens, displaying product prices in Bengali numerals.
+3. Protected Product Details & Market-Based Price Breakdown
+- Product detail pages are protected routes. If a user is not signed in, a toast notification appears automatically, and the user is redirected to the sign-in page.
+- Summary cards displaying national minimum, maximum, and average prices.
+- Comparative price analysis covering yesterday, last week, and last month.
+- Market-specific price listings for eight regional markets, including Karwan Bazar, Green Market, and Amtali Bazar, with filtering options by division.
+4. Smart Numeric Sorting & Search (C1)
+- A dropdown on category pages for sorting products by their actual numerical prices:
+  - Default
+  - Price: Low to High
+  - Price: High to Low
+- Ensures accurate sorting based on actual numerical values rather than string comparisons.
+5. Complete Authentication & Profile Update (Better Auth & C3)
+- Email/password authentication and social login with Google and GitHub.
+- Automatic redirection to the sign-in page after registration.
+- A profile view and a C3 – Update Information page that allows users to easily update their names.
+- A custom, 4MD-friendly 404 error page and skeleton loaders for data loading states.
 
----
 
-## 🛠️ ব্যবহৃত প্রযুক্তি সমূহ (Technologies Used)
 
-- **Framework**: [Next.js](https://nextjs.org/) (App Router, Server & Client Components, Route Handlers)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) & [DaisyUI](https://daisyui.com/)
-- **Authentication**: [BetterAuth](https://www.better-auth.com/) (Email/Password + Google & GitHub OAuth)
-- **Database**: SQLite / Better-SQLite3
-- **Notifications**: [React Hot Toast](https://react-hot-toast.com/)
-- **Fonts**: Hind Siliguri (Google Bengali Font)
-
----
-
-## 🌟 প্রধান ৫টি বৈশিষ্ট্য (5 Key Features)
-
-1. **রিয়েলটাইম মূল্য টিকার ও ক্যাটাগরি নেভিগেশন (Live Price Ticker & Category Bar)**:
-   - ওয়েবসাইটের শীর্ষে চলমান ইনফিনিট মারকুই স্ট্রিপ, যা প্রতিটি পণ্যের ইমোজি, নাম, বর্তমান দর এবং মূল্য পরিবর্তনের শতকরা হার (▲/▼) রিয়েলটাইমে স্ক্রোল করে প্রদর্শন করে।
-   - বাংলা তারিখসহ আকর্ষণীয় লোগো এবং অ্যাক্টিভ ক্যাটাগরি হাইলাইট করা নেভিগেশন বার।
-
-2. **মূল্য হ্রাস-বৃদ্ধির শীর্ষ তালিকা ও সব পণ্যের গ্রিড (Risers, Fallers & Responsive Product Grid)**:
-   - **আজ দাম বেড়েছে ▲**: বাজারে যে শীর্ষ ৬টি পণ্যের দাম সর্বোচ্চ বৃদ্ধি পেয়েছে তাদের বিশেষ লাল ব্যাজ সহ হাইলাইট।
-   - **আজ দাম কমেছে ▼**: বাজারে যে শীর্ষ ৬টি পণ্যের দাম সর্বোচ্চ হ্রাস পেয়েছে তাদের বিশেষ সবুজ ব্যাজ সহ হাইলাইট।
-   - **সব পণ্য গ্রিড**: মোবাইল, ট্যাবলেট ও ডেস্কটপের জন্য সম্পূর্ণ রেসপন্সিভ গ্রিড লেআউট যাতে বাংলা সংখ্যায় মূল্য প্রদর্শিত হয়।
-
-3. **সুরক্ষিত বিস্তারিত পৃষ্ঠা ও বাজারভিত্তিক আজকের দর (Protected Product Details & Market Breakdown)**:
-   - লগইন ছাড়া বিস্তারিত পৃষ্ঠা সুরক্ষিত (Protected Route), সাইন ইন না থাকলে স্বয়ংক্রিয়ভাবে টোস্ট নোটিফিকেশন প্রদর্শন করে সাইন ইন পেজে রিডাইরেক্ট করা হয়।
-   - জাতীয় সর্বনিম্ন (Min), সর্বোচ্চ (Max), এবং গড় (Average) দামের সামারি কার্ড।
-   - গতকাল, গত সপ্তাহ এবং গত মাসের তুলনামূলক পর্যালোচনা।
-   - কারওয়ান বাজার, গ্রীন মার্কেট, আমতলী বাজার সহ ৮টি বিভাগের বাজারভিত্তিক মূল্য তালিকা এবং বিভাগ অনুযায়ী ফিল্টার করার সুবিধা।
-
-4. **স্মার্ট সংখ্যাগত ফিল্টার ও সাজানোর সুবিধা (C1 Numeric Sorting & Search)**:
-   - ক্যাটাগরি পেজে সঠিক নিউমেরিক ভ্যালু অনুযায়ী পণ্যের দাম সাজানোর ড্রপডাউন:
-     - `ডিফল্ট`
-     - `দাম: কম থেকে বেশি`
-     - `দাম: বেশি থেকে কম`
-   - স্ট্রিং এর বদলে প্রকৃত গাণিতিক মানের ভিত্তিতে সঠিক সর্টিং নিশ্চিত করা হয়েছে।
-
-5. **সম্পূর্ণ প্রমাণীকরণ ও তথ্য আপডেট সুবিধা (BetterAuth & C3 Update Information)**:
-   - ইমেইল/পাসওয়ার্ড ও সোশ্যাল লগইন (Google & GitHub)।
-   - রেজিস্ট্রেশনের পর স্বয়ংক্রিয়ভাবে লগইন পেজে রিডাইরেক্ট।
-   - প্রোফাইল ভিউ এবং **C3 - Update Information** পেজ, যেখান থেকে ব্যবহারকারী খুব সহজে নিজের নাম আপডেট করতে পারেন।
-   - কাস্টম ৪MD-বান্ধব ৪০৪ পৃষ্ঠা ও ডেটা লোডিংয়ের জন্য স্কেলিটন (Skeleton) লোডার।
-
----
-
-## 💻 লোকাল মেশিনে চালানোর নিয়ম (Getting Started)
-
-১. রিপোজিটরিটি ক্লোন করুন:
-\`\`\`bash
-git clone <repository-url>
-cd bazardor-f
-\`\`\`
-
-২. প্রয়োজনীয় প্যাকেজসমূহ ইনস্টল করুন:
-\`\`\`bash
-npm install
-\`\`\`
-
-৩. এনভায়রনমেন্ট ভেরিয়েবল সেটআপ করুন (`.env.local`):
-\`\`\`env
-BETTER_AUTH_SECRET=your-secret-key-here
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-GOOGLE_CLIENT_ID=your-google-client-id
-GOOGLE_CLIENT_SECRET=your-google-client-secret
-\`\`\`
-
-৪. ডাটাবেজ স্কিমা তৈরি করুন:
-\`\`\`bash
-node init-db.js
-\`\`\`
-
-৫. ডেভেলপমেন্ট সার্ভার চালু করুন:
-\`\`\`bash
-npm run dev
-\`\`\`
-ব্রাউজারে [http://localhost:3000](http://localhost:3000) ওপেন করুন।
-
----
-
-## 📜 লাইসেন্স (License)
-
-এই প্রজেক্টটি MIT লাইসেন্সের আওতাভুক্ত।
