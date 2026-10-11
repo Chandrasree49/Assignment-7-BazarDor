@@ -22,7 +22,7 @@ body {
 }
 
 .marquee-track {
-  animation: marquee 35s linear infinite;
+  animation: marquee 90s linear infinite;
   display: flex;
   width: max-content;
 }
