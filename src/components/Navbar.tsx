@@ -24,7 +24,6 @@ export default function Navbar({ categories, products }: NavbarProps) {
     setBanglaDate(getBengaliDate());
   }, []);
 
-  // Determine active category from URL
   const activeCategorySlug = pathname.startsWith("/category/")
     ? pathname.split("/category/")[1]
     : "";
@@ -37,47 +36,65 @@ export default function Navbar({ categories, products }: NavbarProps) {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm">
-      {/* Top Row: Logo + Auth */}
-      <div className="border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-14">
-          {/* Logo */}
-          <Link href="/" className="flex flex-col leading-tight">
-            <span className="text-xl font-bold text-green-700">🛒 বাজার দর</span>
-            <span className="text-xs text-gray-500">{banglaDate}</span>
+    <header className="sticky top-0 z-50 bg-white shadow-xs">
+      {/* 1. Top Bar: Logo + Bangla Date (Left) & User Profile/Auth (Right) */}
+      <div className="border-b border-gray-100/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+          {/* Logo with Rounded Green Box icon + Title & Date underneath */}
+          <Link href="/" className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white text-xl shadow-xs">
+              🛒
+            </div>
+            <div className="flex flex-col leading-tight">
+              <span className="text-xl font-bold text-gray-900 tracking-tight">বাজার দর</span>
+              <span className="text-xs text-gray-500 font-normal">{banglaDate}</span>
+            </div>
           </Link>
 
-          {/* Desktop Auth Buttons */}
-          <div className="hidden sm:flex items-center gap-2">
+          {/* Right: Auth / Profile */}
+          <div className="hidden sm:flex items-center gap-3">
             {isPending ? (
-              <div className="skeleton h-8 w-24 rounded" />
+              <div className="skeleton h-8 w-24 rounded-full" />
             ) : session?.user ? (
               <div className="flex items-center gap-3">
                 <Link
                   href="/profile"
-                  className="flex items-center gap-2 text-sm text-gray-700 hover:text-green-700"
+                  className="flex items-center gap-2 hover:opacity-85 transition-opacity"
                 >
-                  <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-bold text-sm">
-                    {session.user.name?.charAt(0)?.toUpperCase() ?? "U"}
+                  <div className="w-9 h-9 rounded-full overflow-hidden bg-gray-200 border border-gray-300 flex items-center justify-center text-gray-700 font-bold text-sm">
+                    {session.user.image ? (
+                      <img
+                        src={session.user.image}
+                        alt={session.user.name || "User"}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <span>{session.user.name?.charAt(0)?.toUpperCase() ?? "U"}</span>
+                    )}
                   </div>
-                  <span className="hidden md:block">{session.user.name}</span>
+                  <span className="text-sm font-medium text-gray-800 flex items-center gap-1">
+                    {session.user.name}
+                    <svg className="w-3.5 h-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </span>
                 </Link>
                 <button
                   onClick={handleSignOut}
-                  className="btn btn-sm btn-outline btn-error rounded-full"
+                  className="text-xs text-gray-500 hover:text-red-600 font-medium ml-1"
                 >
                   সাইন আউট
                 </button>
               </div>
             ) : (
-              <>
-                <Link href="/signin" className="btn btn-sm btn-ghost rounded-full">
+              <div className="flex items-center gap-2">
+                <Link href="/signin" className="btn btn-sm btn-ghost rounded-xl text-gray-700 text-xs font-semibold">
                   সাইন ইন
                 </Link>
-                <Link href="/signup" className="btn btn-sm btn-success rounded-full text-white">
+                <Link href="/signup" className="btn btn-sm bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold border-none">
                   সাইন আপ
                 </Link>
-              </>
+              </div>
             )}
           </div>
 
@@ -98,57 +115,54 @@ export default function Navbar({ categories, products }: NavbarProps) {
         </div>
       </div>
 
-      {/* Category Nav Row */}
-      <div className="bg-green-50 border-b border-green-100 overflow-x-auto scrollbar-hide">
+      {/* 2. Middle Row: Category Links (Figma Clean Tab Style) */}
+      <div className="border-b border-gray-100 overflow-x-auto scrollbar-hide bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center gap-1 h-10 min-w-max">
-            <Link
-              href="/"
-              className={`px-3 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
-                pathname === "/"
-                  ? "bg-green-700 text-white"
-                  : "text-gray-600 hover:bg-green-100 hover:text-green-700"
-              }`}
-            >
-              সব পণ্য
-            </Link>
-            {categories.map((cat) => (
-              <Link
-                key={cat.id}
-                href={`/category/${cat.slug}`}
-                className={`px-3 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors flex items-center gap-1 ${
-                  activeCategorySlug === cat.slug
-                    ? "bg-green-700 text-white"
-                    : "text-gray-600 hover:bg-green-100 hover:text-green-700"
-                }`}
-              >
-                <span>{cat.icon}</span>
-                <span>{cat.nameBn}</span>
-              </Link>
-            ))}
+          <nav className="flex items-center gap-6 h-11 min-w-max">
+            {categories.map((cat) => {
+              const isActive = activeCategorySlug === cat.slug;
+              return (
+                <Link
+                  key={cat.id}
+                  href={`/category/${cat.slug}`}
+                  className={`relative py-2 text-xs sm:text-sm font-medium transition-colors flex items-center gap-1.5 ${
+                    isActive
+                      ? "text-emerald-700 font-bold"
+                      : "text-gray-600 hover:text-gray-900"
+                  }`}
+                >
+                  <span className="text-base select-none">{cat.icon}</span>
+                  <span>{cat.nameBn}</span>
+                  {isActive && (
+                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600 rounded-full" />
+                  )}
+                </Link>
+              );
+            })}
           </nav>
         </div>
       </div>
 
-      {/* Price Ticker / Marquee */}
-      <div className="bg-gray-900 text-white text-xs py-1.5 overflow-hidden">
+      {/* 3. Ticker: Light Background & Figma Dot/Color Pill Styling */}
+      <div className="bg-[#f3f4f6]/90 border-b border-gray-200/70 text-gray-700 text-xs py-2 overflow-hidden select-none">
         <div className="marquee-track">
           {[...products, ...products].map((p, i) => {
-            const arrow = p.change.dir === "up" ? "▲" : p.change.dir === "down" ? "▼" : "—";
-            const color =
-              p.change.dir === "up"
-                ? "text-red-400"
-                : p.change.dir === "down"
-                ? "text-green-400"
-                : "text-gray-400";
+            const isUp = p.change.dir === "up";
+            const isDown = p.change.dir === "down";
+            const arrow = isUp ? "▲" : isDown ? "▼" : "—";
+            const changeColor = isUp ? "text-red-500 font-semibold" : isDown ? "text-emerald-600 font-semibold" : "text-gray-400";
+            const unitBn = p.unit === "kg" ? "কেজি" : p.unit === "litre" ? "লিটার" : p.unit === "dozen" ? "ডজন" : "পিস";
+
             return (
-              <span key={`${p.id}-${i}`} className="inline-flex items-center gap-1 mr-8 whitespace-nowrap">
-                <span>{p.image}</span>
-                <span className="font-medium">{p.nameBn}</span>
-                <span className="text-yellow-300">{formatPriceBn(p.today)} টাকা/{p.unit === "kg" ? "কেজি" : p.unit === "litre" ? "লিটার" : p.unit === "dozen" ? "ডজন" : "পিস"}</span>
-                <span className={color}>
-                  {arrow} {toBengaliDigits(Math.abs(p.change.pct).toFixed(1))}%
+              <span key={`${p.id}-${i}`} className="inline-flex items-center gap-1.5 mr-8 whitespace-nowrap">
+                <span className="text-sm select-none">{p.image}</span>
+                <span className="font-semibold text-gray-800">{p.nameBn}</span>
+                <span className="text-gray-600">{formatPriceBn(p.today)} টাকা/{unitBn}</span>
+                <span className={`inline-flex items-center gap-0.5 text-xs ${changeColor}`}>
+                  <span>{arrow}</span>
+                  <span>{toBengaliDigits(Math.abs(p.change.pct).toFixed(1))}%</span>
                 </span>
+                <span className="text-gray-300 ml-4 select-none">•</span>
               </span>
             );
           })}
@@ -162,14 +176,14 @@ export default function Navbar({ categories, products }: NavbarProps) {
             <>
               <Link
                 href="/profile"
-                className="block py-2 text-gray-700"
+                className="block py-2 text-gray-800 font-medium"
                 onClick={() => setMenuOpen(false)}
               >
                 👤 {session.user.name}
               </Link>
               <button
                 onClick={() => { handleSignOut(); setMenuOpen(false); }}
-                className="w-full text-left py-2 text-red-600"
+                className="w-full text-left py-2 text-red-600 text-sm font-medium"
               >
                 সাইন আউট
               </button>
@@ -179,7 +193,7 @@ export default function Navbar({ categories, products }: NavbarProps) {
               <Link href="/signin" className="block py-2 text-gray-700" onClick={() => setMenuOpen(false)}>
                 সাইন ইন
               </Link>
-              <Link href="/signup" className="block py-2 text-green-700 font-medium" onClick={() => setMenuOpen(false)}>
+              <Link href="/signup" className="block py-2 text-emerald-700 font-medium" onClick={() => setMenuOpen(false)}>
                 সাইন আপ
               </Link>
             </>

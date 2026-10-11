@@ -39,7 +39,7 @@ export default async function RootLayout({
 
   return (
     <html lang="bn" className={`${hindSiliguri.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-slate-50 text-gray-900 font-sans">
+      <body className="min-h-full flex flex-col bg-[#f8f9fa] text-gray-900 font-sans">
         <Toaster position="top-center" reverseOrder={false} />
         <Navbar categories={categories} products={products} />
         <main className="flex-grow">{children}</main>

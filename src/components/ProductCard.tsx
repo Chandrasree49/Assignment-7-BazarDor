@@ -11,51 +11,50 @@ interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
   const { slug, nameBn, image, unit, today, change } = product;
 
-  const badgeColor =
-    change.dir === "up"
-      ? "bg-red-100 text-red-600"
-      : change.dir === "down"
-      ? "bg-green-100 text-green-700"
-      : "bg-gray-100 text-gray-500";
-
-  const arrow =
-    change.dir === "up" ? "▲" : change.dir === "down" ? "▼" : "—";
+  const isUp = change.dir === "up";
+  const isDown = change.dir === "down";
+  const arrow = isUp ? "▲" : isDown ? "▼" : "—";
+  const badgeColor = isUp
+    ? "bg-red-50 text-red-600 font-semibold"
+    : isDown
+    ? "bg-emerald-50 text-emerald-700 font-semibold"
+    : "bg-gray-50 text-gray-500 font-medium";
 
   const pctAbs = Math.abs(change.pct);
 
   return (
-    <Link href={`/product/${slug}`}>
-      <div className="bg-white border border-gray-200 rounded-2xl p-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-pointer h-full flex flex-col">
-        {/* Emoji / Image */}
-        <div className="text-5xl text-center mb-3 select-none" role="img" aria-label={nameBn}>
-          {image}
+    <Link href={`/product/${slug}`} className="block h-full">
+      <div className="bg-white border border-gray-100/90 rounded-2xl p-4 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-md hover:border-gray-200 transition-all cursor-pointer h-full flex flex-col justify-between">
+        {/* Top: Image/Emoji box + Name & Unit */}
+        <div className="flex items-center gap-3.5">
+          <div className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center text-2xl select-none shrink-0 border border-gray-100/80">
+            {image}
+          </div>
+          <div className="min-w-0">
+            <h3 className="text-sm font-bold text-gray-900 truncate">
+              {nameBn}
+            </h3>
+            <p className="text-[11px] text-gray-400 mt-0.5 font-normal">
+              {getUnitLabel(unit)}
+            </p>
+          </div>
         </div>
 
-        {/* Name */}
-        <h3 className="text-sm font-semibold text-gray-800 text-center mb-1 line-clamp-2">
-          {nameBn}
-        </h3>
-
-        {/* Unit */}
-        <p className="text-xs text-gray-500 text-center mb-3">{getUnitLabel(unit)}</p>
-
-        <div className="mt-auto">
-          {/* Price row */}
-          <div className="flex items-center justify-between">
-            <span className="text-xs text-gray-500">আজকের দাম</span>
-            <span className="font-bold text-gray-900 text-sm">
-              {formatPriceBn(today)} টাকা
-            </span>
+        {/* Bottom: Price row & Change Badge */}
+        <div className="mt-4 pt-3 border-t border-gray-50 flex items-end justify-between">
+          <div>
+            <span className="text-[10px] text-gray-400 block font-normal">আজকের দাম</span>
+            <div className="text-sm font-extrabold text-gray-900 leading-tight mt-0.5">
+              {formatPriceBn(today)} <span className="text-xs font-semibold text-gray-600">টাকা</span>
+            </div>
           </div>
 
-          {/* Change badge */}
-          <div className="flex justify-end mt-2">
-            <span
-              className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium ${badgeColor}`}
-            >
-              {arrow} {toBengaliDigits(pctAbs.toFixed(1))}%
-            </span>
-          </div>
+          <span
+            className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[11px] ${badgeColor}`}
+          >
+            <span>{arrow}</span>
+            <span>{toBengaliDigits(pctAbs.toFixed(1))}%</span>
+          </span>
         </div>
       </div>
     </Link>
