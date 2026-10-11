@@ -50,7 +50,13 @@ export default function SignUpPage() {
       } else {
         toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে! অনুগ্রহ করে লগইন করুন।");
         // Requirement 6: "If the user Register successfully then navigate him to his login page."
-        router.push(`/signin${callbackUrl !== "/" ? `?callbackUrl=${encodeURIComponent(callbackUrl)}` : ""}`);
+        router.push(
+          `/signin${
+            callbackUrl !== "/"
+              ? `?callbackUrl=${encodeURIComponent(callbackUrl)}`
+              : ""
+          }`
+        );
       }
     } catch (err: any) {
       const errorText = err?.message || "রেজিস্ট্রেশন করার সময় ত্রুটি হয়েছে";
@@ -63,7 +69,9 @@ export default function SignUpPage() {
 
   const handleSocialLogin = async (provider: "google" | "github") => {
     try {
-      toast.loading(`${provider === "google" ? "গুগল" : "গিটহাব"} দিয়ে প্রবেশ করা হচ্ছে...`);
+      toast.loading(
+        `${provider === "google" ? "গুগল" : "গিটহাব"} দিয়ে প্রবেশ করা হচ্ছে...`
+      );
       await signIn.social({
         provider,
         callbackURL: callbackUrl,
@@ -81,10 +89,10 @@ export default function SignUpPage() {
         <div className="text-center space-y-1">
           <div className="text-4xl mb-2 select-none">📝</div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900">
-            নতুন অ্যাকাউন্ট তৈরি করুন
+            অ্যাকাউন্ট তৈরি করুন
           </h1>
           <p className="text-xs sm:text-sm text-gray-500">
-            বাজার দর এ যোগ দিয়ে নিয়মিত বাজার দর আপডেট পান
+            বিনা খরচে সাইন আপ করে সব বিস্তারিত দাম দেখুন।
           </p>
         </div>
 
@@ -99,7 +107,7 @@ export default function SignUpPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-xs font-semibold text-gray-700 mb-1">
-              পুরো নাম
+              নাম
             </label>
             <input
               type="text"
@@ -113,7 +121,7 @@ export default function SignUpPage() {
 
           <div>
             <label className="block text-xs font-semibold text-gray-700 mb-1">
-              ইমেইল অ্যাড্রেস
+              ইমেইল
             </label>
             <input
               type="email"
@@ -144,12 +152,16 @@ export default function SignUpPage() {
             disabled={loading}
             className="btn btn-success w-full text-white rounded-xl font-semibold shadow-md hover:shadow-lg disabled:opacity-50"
           >
-            {loading ? <span className="loading loading-spinner" /> : "রেজিস্ট্রেশন করুন"}
+            {loading ? (
+              <span className="loading loading-spinner" />
+            ) : (
+              "অ্যাকাউন্ট তৈরি করুন"
+            )}
           </button>
         </form>
 
         {/* Divider */}
-        <div className="divider text-xs text-gray-400">অথবা সোশ্যাল দিয়ে শুরু করুন</div>
+        <div className="divider text-xs text-gray-400">অথবা</div>
 
         {/* Social Logins */}
         <div className="space-y-2">
@@ -185,7 +197,11 @@ export default function SignUpPage() {
             className="btn btn-outline w-full rounded-xl flex items-center justify-center gap-2 border-gray-300 hover:bg-gray-50 text-gray-700 text-sm font-medium"
           >
             <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-              <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+              />
             </svg>
             GitHub দিয়ে সাইন আপ
           </button>
@@ -193,12 +209,27 @@ export default function SignUpPage() {
 
         {/* Link to Login */}
         <div className="text-center text-xs sm:text-sm text-gray-500 pt-2">
-          ইতিমধ্যে একটি অ্যাকাউন্ট আছে?{" "}
+          অ্যাকাউন্ট আছে?{" "}
           <Link
-            href={`/signin${callbackUrl !== "/" ? `?callbackUrl=${encodeURIComponent(callbackUrl)}` : ""}`}
-            className="text-green-700 font-semibold hover:underline"
+            href={`/signin${
+              callbackUrl !== "/"
+                ? `?callbackUrl=${encodeURIComponent(callbackUrl)}`
+                : ""
+            }`}
+            className="text-emerald-700 font-semibold hover:underline"
           >
             সাইন ইন করুন
+          </Link>
+        </div>
+
+        {/* Back to Home Link matching Figma */}
+        <div className="text-center pt-2">
+          <Link
+            href="/"
+            className="text-xs text-gray-400 hover:text-gray-600 transition-colors inline-flex items-center gap-1.5"
+          >
+            <span>←</span>
+            <span>হোম পেজে ফিরে যান</span>
           </Link>
         </div>
       </div>

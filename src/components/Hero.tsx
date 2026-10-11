@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+import bazarlogo from "../assests/bazar-hero.png";
 export default function Hero() {
   return (
     <section className="pt-6 pb-2">
@@ -21,7 +21,8 @@ export default function Hero() {
 
               {/* Subtitle */}
               <p className="text-gray-500 text-xs sm:text-sm leading-relaxed max-w-xl">
-                চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম — বাজারভিত্তিক বিস্তারিত, গড়, সর্বনিম্ন-সর্বোচ্চ এবং দামের পরিবর্তন এক জায়গায়।
+                চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম — বাজারভিত্তিক
+                বিস্তারিত, গড়, সর্বনিম্ন-সর্বোচ্চ এবং দামের পরিবর্তন এক জায়গায়।
               </p>
 
               {/* CTA Button */}
@@ -39,11 +40,10 @@ export default function Hero() {
             <div className="md:col-span-5 flex justify-center md:justify-end">
               <div className="relative w-56 sm:w-64 md:w-72 aspect-square">
                 <Image
-                  src="/hero-basket.png"
+                  src={bazarlogo}
                   alt="বাজারের ফলের ঝুড়ি"
-                  fill
                   className="object-contain"
-                  priority
+                
                 />
               </div>
             </div>

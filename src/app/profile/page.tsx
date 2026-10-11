@@ -1,13 +1,22 @@
 "use client";
 
-import Link from "next/link";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useSession, signOut } from "@/lib/auth-client";
+import { useSession, signOut, authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 export default function ProfilePage() {
   const router = useRouter();
   const { data: session, isPending } = useSession();
+  const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (session?.user?.name) {
+      setName(session.user.name);
+    }
+  }, [session]);
 
   const handleSignOut = async () => {
     await signOut();
@@ -16,11 +25,37 @@ export default function ProfilePage() {
     router.refresh();
   };
 
+  const handleUpdate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim()) {
+      toast.error("নামের ঘরটি পূরণ করুন");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const res = await authClient.updateUser({
+        name: name.trim(),
+      });
+
+      if (res.error) {
+        toast.error(res.error.message || "তথ্য আপডেট করা যায়নি");
+      } else {
+        toast.success("নাম সফলভাবে আপডেট করা হয়েছে!");
+        router.refresh();
+      }
+    } catch (err: any) {
+      toast.error(err?.message || "আপডেট করার সময় ত্রুটি ঘটেছে");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (isPending) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-16 space-y-6">
-        <div className="skeleton h-40 w-full rounded-3xl" />
-        <div className="skeleton h-24 w-full rounded-2xl" />
+        <div className="skeleton h-32 w-full rounded-2xl" />
+        <div className="skeleton h-48 w-full rounded-2xl" />
       </div>
     );
   }
@@ -38,56 +73,81 @@ export default function ProfilePage() {
     );
   }
 
-  const { name, email, createdAt } = session.user as any;
-
   return (
-    <div className="max-w-2xl mx-auto px-4 py-12">
-      <div className="bg-white rounded-3xl border border-gray-200 p-8 shadow-sm space-y-8">
-        {/* Header / Avatar */}
-        <div className="flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left border-b border-gray-100 pb-6">
-          <div className="w-20 h-20 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-3xl font-extrabold select-none shadow-inner">
-            {name?.charAt(0)?.toUpperCase() ?? "U"}
+    <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10 space-y-6">
+      {/* Page Header */}
+      <div>
+        <h1 className="text-2xl font-black text-gray-900 tracking-tight">
+          আমার প্রোফাইল
+        </h1>
+        <p className="text-xs text-gray-500 mt-1">
+          আপনার অ্যাকাউন্টের তথ্য এখানে দেখুন।
+        </p>
+      </div>
+
+      {/* Card 1: User Info Banner matching Figma */}
+      <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-xs flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <div className="w-14 h-14 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 flex items-center justify-center text-gray-700 font-bold text-lg shrink-0">
+            {session.user.image ? (
+              <img
+                src={session.user.image}
+                alt={session.user.name || "User"}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <span>{session.user.name?.charAt(0)?.toUpperCase() ?? "U"}</span>
+            )}
           </div>
-          <div className="space-y-1">
-            <h1 className="text-2xl font-bold text-gray-900">{name}</h1>
-            <p className="text-sm text-gray-500">{email}</p>
-            <span className="inline-block badge badge-success text-white text-xs px-2.5 py-0.5 mt-1">
-              সক্রিয় সদস্য
-            </span>
+          <div>
+            <h2 className="text-base font-bold text-gray-900 leading-tight">
+              {session.user.name}
+            </h2>
+            <p className="text-xs text-gray-400 mt-0.5">
+              {session.user.email}
+            </p>
           </div>
         </div>
 
-        {/* Profile Info Details */}
-        <div className="space-y-4">
-          <h2 className="text-base font-bold text-gray-800">অ্যাকাউন্ট বিবরণ</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-            <div className="p-4 bg-slate-50 rounded-2xl border border-gray-100">
-              <span className="text-gray-500 text-xs block mb-1">ব্যবহারকারীর নাম</span>
-              <span className="font-semibold text-gray-800">{name}</span>
-            </div>
-            <div className="p-4 bg-slate-50 rounded-2xl border border-gray-100">
-              <span className="text-gray-500 text-xs block mb-1">ইমেইল</span>
-              <span className="font-semibold text-gray-800">{email}</span>
-            </div>
-          </div>
-        </div>
+        {/* Red Outline Signout Button matching Figma */}
+        <button
+          onClick={handleSignOut}
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl border border-red-200 text-red-500 hover:bg-red-50 text-xs font-semibold transition-colors"
+        >
+          <span>↩</span>
+          <span>সাইন আউট</span>
+        </button>
+      </div>
 
-        {/* Actions: C3 Update Information Button + Signout */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-gray-100">
-          <Link
-            href="/profile/update"
-            className="btn btn-success text-white rounded-xl w-full sm:w-auto px-6 shadow-sm hover:shadow-md"
-          >
-            ✏️ তথ্য আপডেট করুন (Update Info)
-          </Link>
+      {/* Card 2: Update Information Form matching Figma */}
+      <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-xs space-y-4">
+        <h3 className="text-sm font-bold text-gray-900">
+          তথ্য
+        </h3>
+
+        <form onSubmit={handleUpdate} className="space-y-4">
+          <div>
+            <label className="block text-[11px] font-semibold text-gray-600 mb-1.5">
+              নাম
+            </label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="আপনার নাম"
+              required
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50/40 text-sm text-gray-800 focus:outline-none focus:border-emerald-600 focus:bg-white transition-all"
+            />
+          </div>
 
           <button
-            onClick={handleSignOut}
-            className="btn btn-outline btn-error rounded-xl w-full sm:w-auto px-6"
+            type="submit"
+            disabled={loading}
+            className="w-full py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-xs sm:text-sm shadow-xs transition-colors disabled:opacity-50"
           >
-            সাইন আউট
+            {loading ? "আপডেট হচ্ছে..." : "আপডেট"}
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );

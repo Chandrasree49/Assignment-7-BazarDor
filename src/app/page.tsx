@@ -72,14 +72,17 @@ export default async function HomePage() {
         </section>
 
         {/* 3. Section C — “সব পণ্য” with responsive grid */}
-        <section id="সব-পণ্য" className="scroll-mt-24 pt-4 border-t border-gray-100">
+        <section
+          id="সব-পণ্য"
+          className="scroll-mt-24 pt-4 border-t border-gray-100"
+        >
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-5">
             <div>
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
                 সব পণ্য
               </h2>
               <p className="text-xs sm:text-sm text-gray-500 mt-0.5">
-                বাজারে তালিকাভুক্ত সকল নিত্যপ্রয়োজনীয় পণ্যের তালিকা ও আজকের দর
+                মোট ৩৩টি পণ্য দেখানো হচ্ছে
               </p>
             </div>
             <div className="text-xs text-gray-400">

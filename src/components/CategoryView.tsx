@@ -30,43 +30,52 @@ export default function CategoryView({
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
-      {/* Category Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-5">
-        <div className="flex items-center gap-3">
-          <span className="text-4xl p-2 bg-green-50 rounded-2xl border border-green-100 select-none">
-            {category.icon}
-          </span>
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900">
-              {category.nameBn}
-            </h1>
-            <p className="text-xs sm:text-sm text-gray-500 mt-0.5">
-              মোট পণ্য: {initialProducts.length} টি
-            </p>
-          </div>
-        </div>
+  
+{/* Category Header Card */}
+<div className="rounded-2xl border border-[#dfe8df] bg-[#fbfdfb] p-5">
+  <div className="flex items-center gap-3">
+    <span className="select-none text-4xl">
+      {category.icon}
+    </span>
 
-        {/* C1: Sort dropdown with Bengali numerals sorting */}
-        <div className="flex items-center gap-2 self-start sm:self-auto">
-          <label htmlFor="sort-select" className="text-sm font-semibold text-gray-700 whitespace-nowrap">
-            সাজান:
-          </label>
-          <div className="relative">
-            <select
-              id="sort-select"
-              value={sortOption}
-              onChange={(e) => setSortOption(e.target.value as any)}
-              className="select select-bordered select-sm sm:select-md rounded-xl bg-white border-gray-300 pr-8 font-medium text-sm text-gray-800 focus:border-green-600 focus:outline-none"
-            >
-              <option value="default">ডিফল্ট</option>
-              <option value="price-asc">দাম: কম থেকে বেশি</option>
-              <option value="price-desc">দাম: বেশি থেকে কম</option>
-            </select>
-          </div>
-        </div>
-      </div>
+    <div>
+      <h1 className="text-2xl font-extrabold text-gray-900">
+        {category.nameBn}
+      </h1>
+
+      <p className="mt-0.5 text-xs text-gray-500 sm:text-sm">
+        {initialProducts.length} টি পণ্যের আজকের দাম ও পরিবর্তন
+      </p>
+    </div>
+  </div>
+</div>
+
+{/* Sort Dropdown Card */}
+<div className="mt-5 flex items-center justify-end gap-2 rounded-2xl border border-[#dfe8df] bg-[#fbfdfb] p-4">
+  <label
+    htmlFor="sort-select"
+    className="whitespace-nowrap text-sm text-gray-500"
+  >
+    সাজান
+  </label>
+
+  <select
+    id="sort-select"
+    value={sortOption}
+    onChange={(e) => setSortOption(e.target.value as any)}
+    className="select select-bordered select-sm rounded-lg border-gray-300 bg-transparent text-sm text-gray-800 focus:border-green-600 focus:outline-none"
+  >
+    <option value="default">ডিফল্ট</option>
+    <option value="price-asc">দাম: কম থেকে বেশি</option>
+    <option value="price-desc">দাম: বেশি থেকে কম</option>
+  </select>
+</div>
+
 
       {/* Product Cards List */}
+      <p className="text-xs sm:text-sm text-gray-500 mt-0.5">
+      মোট {initialProducts.length} টি পণ্যের আজকের দাম ও পরিবর্তন
+            </p>
       {sortedProducts.length > 0 ? (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {sortedProducts.map((product) => (

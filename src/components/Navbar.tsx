@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { getBengaliDate, formatPriceBn, toBengaliDigits } from "@/lib/utils";
 import { useSession, signOut } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 import { Category, Product } from "@/types";
+import Image from "next/image";
+import logo from '../assests/logo-icon.png';
 
 interface NavbarProps {
   categories: Category[];
@@ -19,9 +21,22 @@ export default function Navbar({ categories, products }: NavbarProps) {
   const { data: session, isPending } = useSession();
   const [banglaDate, setBanglaDate] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setBanglaDate(getBengaliDate());
+  }, []);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const activeCategorySlug = pathname.startsWith("/category/")
@@ -31,19 +46,28 @@ export default function Navbar({ categories, products }: NavbarProps) {
   const handleSignOut = async () => {
     await signOut();
     toast.success("সফলভাবে সাইন আউট হয়েছেন");
+    setDropdownOpen(false);
     router.push("/");
     router.refresh();
   };
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-xs">
-      {/* 1. Top Bar: Logo + Bangla Date (Left) & User Profile/Auth (Right) */}
+      {/* 1. Top Bar: Logo + Date & User Dropdown matching Figma */}
       <div className="border-b border-gray-100/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-          {/* Logo with Rounded Green Box icon + Title & Date underneath */}
+          {/* Logo with Green Box + Title & Date */}
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white text-xl shadow-xs">
-              🛒
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-600 text-white shadow-xs">
+              <Image
+                  src={logo}
+                  alt="বাজার দর"
+                  width={22}
+                  height={22}
+                  priority
+                  className="h-5 w-5 object-contain invert brightness-0"
+                
+                />
             </div>
             <div className="flex flex-col leading-tight">
               <span className="text-xl font-bold text-gray-900 tracking-tight">বাজার দর</span>
@@ -51,17 +75,18 @@ export default function Navbar({ categories, products }: NavbarProps) {
             </div>
           </Link>
 
-          {/* Right: Auth / Profile */}
+          {/* Right: User Profile with Popover Dropdown matching Figma */}
           <div className="hidden sm:flex items-center gap-3">
             {isPending ? (
               <div className="skeleton h-8 w-24 rounded-full" />
             ) : session?.user ? (
-              <div className="flex items-center gap-3">
-                <Link
-                  href="/profile"
-                  className="flex items-center gap-2 hover:opacity-85 transition-opacity"
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  type="button"
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                  className="flex items-center gap-2 hover:opacity-90 transition-opacity focus:outline-none"
                 >
-                  <div className="w-9 h-9 rounded-full overflow-hidden bg-gray-200 border border-gray-300 flex items-center justify-center text-gray-700 font-bold text-sm">
+                  <div className="w-8 h-8 rounded-full overflow-hidden bg-gray-100 border border-gray-200 flex items-center justify-center text-gray-700 font-bold text-xs">
                     {session.user.image ? (
                       <img
                         src={session.user.image}
@@ -78,20 +103,53 @@ export default function Navbar({ categories, products }: NavbarProps) {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </span>
-                </Link>
-                <button
-                  onClick={handleSignOut}
-                  className="text-xs text-gray-500 hover:text-red-600 font-medium ml-1"
-                >
-                  সাইন আউট
                 </button>
+
+                {/* Figma Dropdown Menu */}
+                {dropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-white p-4 shadow-xl border border-gray-100 z-50 animate-in fade-in zoom-in-95 duration-100">
+                    <div className="border-b border-gray-100 pb-3 mb-3">
+                      <h4 className="font-bold text-gray-900 text-sm leading-tight">
+                        {session.user.name}
+                      </h4>
+                      <p className="text-xs text-gray-400 truncate mt-0.5">
+                        {session.user.email}
+                      </p>
+                    </div>
+
+                    <div className="space-y-1 text-sm">
+                      <Link
+                        href="/profile"
+                        onClick={() => setDropdownOpen(false)}
+                        className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-gray-700 hover:bg-gray-50 font-medium transition-colors"
+                      >
+                        <span className="text-gray-500">👤</span>
+                        <span>আমার প্রোফাইল</span>
+                      </Link>
+
+                      <button
+                        onClick={handleSignOut}
+                        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-red-600 hover:bg-red-50 font-medium transition-colors text-left"
+                      >
+                        <span className="text-red-500">↩</span>
+                        <span>সাইন আউট</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="flex items-center gap-2">
-                <Link href="/signin" className="btn btn-sm btn-ghost rounded-xl text-gray-700 text-xs font-semibold">
+                <Link
+                  href="/signin"
+                  className="btn btn-sm btn-ghost rounded-xl text-gray-700 text-xs font-semibold"
+                >
                   সাইন ইন
                 </Link>
-                <Link href="/signup" className="btn btn-sm bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold border-none">
+                <Link
+                  href="/signup"
+                  className="btn btn-sm bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold border-none"
+                >
                   সাইন আপ
                 </Link>
               </div>
@@ -150,17 +208,37 @@ export default function Navbar({ categories, products }: NavbarProps) {
             const isUp = p.change.dir === "up";
             const isDown = p.change.dir === "down";
             const arrow = isUp ? "▲" : isDown ? "▼" : "—";
-            const changeColor = isUp ? "text-red-500 font-semibold" : isDown ? "text-emerald-600 font-semibold" : "text-gray-400";
-            const unitBn = p.unit === "kg" ? "কেজি" : p.unit === "litre" ? "লিটার" : p.unit === "dozen" ? "ডজন" : "পিস";
+            const changeColor = isUp
+              ? "text-red-500 font-semibold"
+              : isDown
+              ? "text-emerald-600 font-semibold"
+              : "text-gray-400";
+            const unitBn =
+              p.unit === "kg"
+                ? "কেজি"
+                : p.unit === "litre"
+                ? "লিটার"
+                : p.unit === "dozen"
+                ? "ডজন"
+                : "পিস";
 
             return (
-              <span key={`${p.id}-${i}`} className="inline-flex items-center gap-1.5 mr-8 whitespace-nowrap">
+              <span
+                key={`${p.id}-${i}`}
+                className="inline-flex items-center gap-1.5 mr-8 whitespace-nowrap"
+              >
                 <span className="text-sm select-none">{p.image}</span>
                 <span className="font-semibold text-gray-800">{p.nameBn}</span>
-                <span className="text-gray-600">{formatPriceBn(p.today)} টাকা/{unitBn}</span>
-                <span className={`inline-flex items-center gap-0.5 text-xs ${changeColor}`}>
+                <span className="text-gray-600">
+                  {formatPriceBn(p.today)} টাকা/{unitBn}
+                </span>
+                <span
+                  className={`inline-flex items-center gap-0.5 text-xs ${changeColor}`}
+                >
                   <span>{arrow}</span>
-                  <span>{toBengaliDigits(Math.abs(p.change.pct).toFixed(1))}%</span>
+                  <span>
+                    {toBengaliDigits(Math.abs(p.change.pct).toFixed(1))}%
+                  </span>
                 </span>
                 <span className="text-gray-300 ml-4 select-none">•</span>
               </span>
@@ -174,26 +252,41 @@ export default function Navbar({ categories, products }: NavbarProps) {
         <div className="sm:hidden bg-white border-t border-gray-100 px-4 py-3 space-y-2">
           {isPending ? null : session?.user ? (
             <>
+              <div className="py-2 border-b border-gray-100">
+                <div className="font-bold text-gray-900 text-sm">{session.user.name}</div>
+                <div className="text-xs text-gray-500">{session.user.email}</div>
+              </div>
               <Link
                 href="/profile"
                 className="block py-2 text-gray-800 font-medium"
                 onClick={() => setMenuOpen(false)}
               >
-                👤 {session.user.name}
+                👤 আমার প্রোফাইল
               </Link>
               <button
-                onClick={() => { handleSignOut(); setMenuOpen(false); }}
+                onClick={() => {
+                  handleSignOut();
+                  setMenuOpen(false);
+                }}
                 className="w-full text-left py-2 text-red-600 text-sm font-medium"
               >
-                সাইন আউট
+                ↩ সাইন আউট
               </button>
             </>
           ) : (
             <>
-              <Link href="/signin" className="block py-2 text-gray-700" onClick={() => setMenuOpen(false)}>
+              <Link
+                href="/signin"
+                className="block py-2 text-gray-700"
+                onClick={() => setMenuOpen(false)}
+              >
                 সাইন ইন
               </Link>
-              <Link href="/signup" className="block py-2 text-emerald-700 font-medium" onClick={() => setMenuOpen(false)}>
+              <Link
+                href="/signup"
+                className="block py-2 text-emerald-700 font-medium"
+                onClick={() => setMenuOpen(false)}
+              >
                 সাইন আপ
               </Link>
             </>
