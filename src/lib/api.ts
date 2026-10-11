@@ -5,7 +5,7 @@ const BASE_URL = "https://openapi.programming-hero.com/api/bazardor";
 export async function fetchAllProducts(): Promise<Product[]> {
   const url = `${BASE_URL}/products`;
   console.log(`[API FETCHING] -> ${url}`);
-  const res = await fetch(url, { cache: "no-store" });
+  const res = await fetch(url, { next: { revalidate: 60 } });
   if (!res.ok) throw new Error("Failed to fetch products");
   return res.json();
 }
@@ -13,7 +13,7 @@ export async function fetchAllProducts(): Promise<Product[]> {
 export async function fetchProductById(id: string | number): Promise<Product | null> {
   const url = `${BASE_URL}/products/${id}`;
   console.log(`[API FETCHING] -> ${url}`);
-  const res = await fetch(url, { cache: "no-store" });
+  const res = await fetch(url, { next: { revalidate: 60 } });
   if (!res.ok) return null;
   return res.json();
 }
@@ -43,7 +43,7 @@ export async function fetchProductBySlugOrId(slugOrId: string): Promise<Product 
 export async function fetchAllCategories(): Promise<Category[]> {
   const url = `${BASE_URL}/categories`;
   console.log(`[API FETCHING] -> ${url}`);
-  const res = await fetch(url, { cache: "no-store" });
+  const res = await fetch(url, { next: { revalidate: 300 } });
   if (!res.ok) throw new Error("Failed to fetch categories");
   return res.json();
 }
@@ -51,7 +51,7 @@ export async function fetchAllCategories(): Promise<Category[]> {
 export async function fetchCategoryProducts(slug: string): Promise<Product[]> {
   const url = `${BASE_URL}/products?category=${slug}`;
   console.log(`[API FETCHING] -> ${url}`);
-  const res = await fetch(url, { cache: "no-store" });
+  const res = await fetch(url, { next: { revalidate: 60 } });
   if (!res.ok) return [];
   return res.json();
 }
@@ -59,7 +59,7 @@ export async function fetchCategoryProducts(slug: string): Promise<Product[]> {
 export async function fetchCategoryBySlug(slug: string): Promise<Category | null> {
   const url = `${BASE_URL}/categories/${slug}`;
   console.log(`[API FETCHING] -> ${url}`);
-  const res = await fetch(url, { cache: "no-store" });
+  const res = await fetch(url, { next: { revalidate: 300 } });
   if (!res.ok) return null;
   return res.json();
 }
