@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 বাজার দর (BazarDor)
 
-## Getting Started
+বাজার দর (BazarDor) হলো একটি আধুনিক, গতিশীল এবং প্রতিক্রিয়াশীল ওয়েব অ্যাপ্লিকেশন যা বাংলাদেশের নিত্যপ্রয়োজনীয় পণ্যের দৈনন্দিন বাজার দর, মূল্য হ্রাস-বৃদ্ধি এবং দেশের প্রধান প্রধান পাইকারি ও খুচরা বাজারভিত্তিক বিস্তারিত বিশ্লেষণের নির্ভরযোগ্য তথ্য প্রদান করে।
 
-First, run the development server:
+---
 
-```bash
+## 🚀 লাইভ ডেমো ও প্রজেক্ট বিবরণ (Project Overview)
+
+বাজারের বিভিন্ন পণ্যের মূল্য পরিবর্তনের সঠিক তথ্য ক্রেতা এবং বিক্রেতাদের কাছে সহজ ও সাবলীল বাংলায় পৌঁছে দেওয়াই এই প্ল্যাটফর্মের মূল লক্ষ্য। চাল, ডাল, তেল, শাকসবজি, মাছ ও মাংসসহ নিত্যপণ্যের জাতীয় গড় দর, সর্বনিম্ন দর, সর্বোচ্চ দর এবং ঐতিহাসিক মূল্য পর্যালোচনা করা যায় এই প্ল্যাটফর্মে।
+
+---
+
+## 🛠️ ব্যবহৃত প্রযুক্তি সমূহ (Technologies Used)
+
+- **Framework**: [Next.js](https://nextjs.org/) (App Router, Server & Client Components, Route Handlers)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) & [DaisyUI](https://daisyui.com/)
+- **Authentication**: [BetterAuth](https://www.better-auth.com/) (Email/Password + Google & GitHub OAuth)
+- **Database**: SQLite / Better-SQLite3
+- **Notifications**: [React Hot Toast](https://react-hot-toast.com/)
+- **Fonts**: Hind Siliguri (Google Bengali Font)
+
+---
+
+## 🌟 প্রধান ৫টি বৈশিষ্ট্য (5 Key Features)
+
+1. **রিয়েলটাইম মূল্য টিকার ও ক্যাটাগরি নেভিগেশন (Live Price Ticker & Category Bar)**:
+   - ওয়েবসাইটের শীর্ষে চলমান ইনফিনিট মারকুই স্ট্রিপ, যা প্রতিটি পণ্যের ইমোজি, নাম, বর্তমান দর এবং মূল্য পরিবর্তনের শতকরা হার (▲/▼) রিয়েলটাইমে স্ক্রোল করে প্রদর্শন করে।
+   - বাংলা তারিখসহ আকর্ষণীয় লোগো এবং অ্যাক্টিভ ক্যাটাগরি হাইলাইট করা নেভিগেশন বার।
+
+2. **মূল্য হ্রাস-বৃদ্ধির শীর্ষ তালিকা ও সব পণ্যের গ্রিড (Risers, Fallers & Responsive Product Grid)**:
+   - **আজ দাম বেড়েছে ▲**: বাজারে যে শীর্ষ ৬টি পণ্যের দাম সর্বোচ্চ বৃদ্ধি পেয়েছে তাদের বিশেষ লাল ব্যাজ সহ হাইলাইট।
+   - **আজ দাম কমেছে ▼**: বাজারে যে শীর্ষ ৬টি পণ্যের দাম সর্বোচ্চ হ্রাস পেয়েছে তাদের বিশেষ সবুজ ব্যাজ সহ হাইলাইট।
+   - **সব পণ্য গ্রিড**: মোবাইল, ট্যাবলেট ও ডেস্কটপের জন্য সম্পূর্ণ রেসপন্সিভ গ্রিড লেআউট যাতে বাংলা সংখ্যায় মূল্য প্রদর্শিত হয়।
+
+3. **সুরক্ষিত বিস্তারিত পৃষ্ঠা ও বাজারভিত্তিক আজকের দর (Protected Product Details & Market Breakdown)**:
+   - লগইন ছাড়া বিস্তারিত পৃষ্ঠা সুরক্ষিত (Protected Route), সাইন ইন না থাকলে স্বয়ংক্রিয়ভাবে টোস্ট নোটিফিকেশন প্রদর্শন করে সাইন ইন পেজে রিডাইরেক্ট করা হয়।
+   - জাতীয় সর্বনিম্ন (Min), সর্বোচ্চ (Max), এবং গড় (Average) দামের সামারি কার্ড।
+   - গতকাল, গত সপ্তাহ এবং গত মাসের তুলনামূলক পর্যালোচনা।
+   - কারওয়ান বাজার, গ্রীন মার্কেট, আমতলী বাজার সহ ৮টি বিভাগের বাজারভিত্তিক মূল্য তালিকা এবং বিভাগ অনুযায়ী ফিল্টার করার সুবিধা।
+
+4. **স্মার্ট সংখ্যাগত ফিল্টার ও সাজানোর সুবিধা (C1 Numeric Sorting & Search)**:
+   - ক্যাটাগরি পেজে সঠিক নিউমেরিক ভ্যালু অনুযায়ী পণ্যের দাম সাজানোর ড্রপডাউন:
+     - `ডিফল্ট`
+     - `দাম: কম থেকে বেশি`
+     - `দাম: বেশি থেকে কম`
+   - স্ট্রিং এর বদলে প্রকৃত গাণিতিক মানের ভিত্তিতে সঠিক সর্টিং নিশ্চিত করা হয়েছে।
+
+5. **সম্পূর্ণ প্রমাণীকরণ ও তথ্য আপডেট সুবিধা (BetterAuth & C3 Update Information)**:
+   - ইমেইল/পাসওয়ার্ড ও সোশ্যাল লগইন (Google & GitHub)।
+   - রেজিস্ট্রেশনের পর স্বয়ংক্রিয়ভাবে লগইন পেজে রিডাইরেক্ট।
+   - প্রোফাইল ভিউ এবং **C3 - Update Information** পেজ, যেখান থেকে ব্যবহারকারী খুব সহজে নিজের নাম আপডেট করতে পারেন।
+   - কাস্টম ৪MD-বান্ধব ৪০৪ পৃষ্ঠা ও ডেটা লোডিংয়ের জন্য স্কেলিটন (Skeleton) লোডার।
+
+---
+
+## 💻 লোকাল মেশিনে চালানোর নিয়ম (Getting Started)
+
+১. রিপোজিটরিটি ক্লোন করুন:
+\`\`\`bash
+git clone <repository-url>
+cd bazardor-f
+\`\`\`
+
+২. প্রয়োজনীয় প্যাকেজসমূহ ইনস্টল করুন:
+\`\`\`bash
+npm install
+\`\`\`
+
+৩. এনভায়রনমেন্ট ভেরিয়েবল সেটআপ করুন (`.env.local`):
+\`\`\`env
+BETTER_AUTH_SECRET=your-secret-key-here
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+\`\`\`
+
+৪. ডাটাবেজ স্কিমা তৈরি করুন:
+\`\`\`bash
+node init-db.js
+\`\`\`
+
+৫. ডেভেলপমেন্ট সার্ভার চালু করুন:
+\`\`\`bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+\`\`\`
+ব্রাউজারে [http://localhost:3000](http://localhost:3000) ওপেন করুন।
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📜 লাইসেন্স (License)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+এই প্রজেক্টটি MIT লাইসেন্সের আওতাভুক্ত।
