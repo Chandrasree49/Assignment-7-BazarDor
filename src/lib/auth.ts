@@ -8,7 +8,7 @@ const sqlite = new Database(dbPath);
 
 export const auth = betterAuth({
   secret: process.env.BETTER_AUTH_SECRET ?? "bazardor-secret-key-change-in-production-12345678",
-  baseURL: process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000",
+  baseURL: process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3001",
   database: sqlite,
   emailAndPassword: {
     enabled: true,
@@ -16,12 +16,8 @@ export const auth = betterAuth({
   },
   socialProviders: {
     google: {
-      clientId: process.env.GOOGLE_CLIENT_ID ?? "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
-    },
-    github: {
-      clientId: process.env.GITHUB_CLIENT_ID ?? "",
-      clientSecret: process.env.GITHUB_CLIENT_SECRET ?? "",
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     },
   },
   user: {
