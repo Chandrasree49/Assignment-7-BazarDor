@@ -138,7 +138,7 @@ export default function SignInPage() {
           <button
             type="button"
             onClick={() => handleSocialLogin("google")}
-            className="btn btn-outline w-full rounded-xl flex items-center justify-center gap-2 border-gray-300 hover:bg-gray-50 text-gray-700 text-sm font-medium"
+            className="btn btn-outline w-full rounded-xl flex items-center justify-center gap-2 border-gray-300 text-gray-700 text-sm font-medium"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path
@@ -164,7 +164,7 @@ export default function SignInPage() {
           <button
             type="button"
             onClick={() => handleSocialLogin("github")}
-            className="btn btn-outline w-full rounded-xl flex items-center justify-center gap-2 border-gray-300 hover:bg-gray-50 text-gray-700 text-sm font-medium"
+            className="btn btn-outline w-full rounded-xl flex items-center justify-center gap-2 border-gray-30 text-gray-700 text-sm font-medium"
           >
             <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
               <path
