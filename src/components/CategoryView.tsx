@@ -15,8 +15,6 @@ export default function CategoryView({
   initialProducts,
 }: CategoryViewProps) {
   const [sortOption, setSortOption] = useState<"default" | "price-asc" | "price-desc">("default");
-
-  // Challenge C1: Sort dropdown handling numeric values (not string)
   const sortedProducts = useMemo(() => {
     const list = [...initialProducts];
     if (sortOption === "price-asc") {
@@ -30,7 +28,6 @@ export default function CategoryView({
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
-      {/* 1. Category Header Card: Title + Icon matching Figma */}
       <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-xs flex items-center justify-between">
         <div className="flex items-center gap-3.5">
           <div className="w-12 h-12 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center text-3xl select-none shrink-0">
@@ -45,8 +42,6 @@ export default function CategoryView({
             </p>
           </div>
         </div>
-
-        {/* 2. Sort Control (C1): সাজান: ডিফল্ট | দাম: কম থেকে বেশি | দাম: বেশি থেকে কম */}
         <div className="flex items-center gap-2">
           <label
             htmlFor="sort-select"
@@ -69,7 +64,6 @@ export default function CategoryView({
         </div>
       </div>
 
-      {/* 3. Product Cards List: Same 3-col card design as Home */}
       {sortedProducts.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {sortedProducts.map((product) => (
@@ -77,7 +71,6 @@ export default function CategoryView({
           ))}
         </div>
       ) : (
-        /* 4. Empty State: 404-style message + CTA button “হোম পেজে ফিরে যান” */
         <div className="text-center py-16 bg-white rounded-2xl border border-gray-100 p-8 space-y-4 shadow-xs">
           <div className="text-6xl select-none">📦</div>
           <h2 className="text-xl font-bold text-gray-800">

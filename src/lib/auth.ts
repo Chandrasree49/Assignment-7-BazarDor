@@ -27,7 +27,7 @@ const initialMemoryDb = {
 };
 
 let sqliteDb: any = null;
-// Only attempt SQLite locally on Windows machine, never on Vercel
+
 if (!isVercel && process.platform === "win32") {
   try {
     const Database = require("better-sqlite3");

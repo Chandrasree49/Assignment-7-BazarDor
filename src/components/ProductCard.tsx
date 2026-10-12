@@ -25,7 +25,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Link href={`/product/${slug}`} className="block h-full">
       <div className="bg-white border border-gray-100/90 rounded-2xl p-4 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-md hover:border-gray-200 transition-all cursor-pointer h-full flex flex-col justify-between">
-        {/* Top: Image/Emoji box + Name & Unit */}
+      
         <div className="flex items-center gap-3.5">
           <div className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center text-2xl select-none shrink-0 border border-gray-100/80">
             {image}
@@ -40,7 +40,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           </div>
         </div>
 
-        {/* Bottom: Price row & Change Badge */}
+       
         <div className="mt-4 pt-3 border-t border-gray-50 flex items-end justify-between">
           <div>
             <span className="text-[10px] text-gray-400 block font-normal">আজকের দাম</span>

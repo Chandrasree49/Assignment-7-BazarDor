@@ -82,14 +82,14 @@ export default function SignInPage() {
           </p>
         </div>
 
-        {/* Error message */}
+    
         {errorMessage && (
           <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs sm:text-sm rounded-xl">
             {errorMessage}
           </div>
         )}
 
-        {/* Form */}
+      
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-xs font-semibold text-gray-700 mb-1">
@@ -130,10 +130,8 @@ export default function SignInPage() {
           </button>
         </form>
 
-        {/* Divider */}
+   
         <div className="divider text-xs text-gray-400">অথবা</div>
-
-        {/* Social Logins */}
         <div className="space-y-2">
           <button
             type="button"
@@ -177,7 +175,7 @@ export default function SignInPage() {
           </button>
         </div>
 
-        {/* Link to Register */}
+    
         <div className="text-center text-xs sm:text-sm text-gray-500 pt-2">
           অ্যাকাউন্ট নেই?{" "}
           <Link
@@ -192,7 +190,6 @@ export default function SignInPage() {
           </Link>
         </div>
 
-        {/* Back to Home Link matching Figma */}
         <div className="text-center pt-2">
           <Link
             href="/"

@@ -3,7 +3,7 @@ import ProductCard from "@/components/ProductCard";
 import { fetchAllProducts } from "@/lib/api";
 import { Product } from "@/types";
 
-export const revalidate = 60; // revalidate every minute
+export const revalidate = 60; 
 
 export default async function HomePage() {
   let products: Product[] = [];
@@ -13,13 +13,13 @@ export default async function HomePage() {
     console.error("Error loading products on HomePage:", err);
   }
 
-  // Section A: Top 6 Risers (dir === "up" sorted descending by pct)
+  
   const risers = products
     .filter((p) => p.change?.dir === "up")
     .sort((a, b) => (b.change?.pct ?? 0) - (a.change?.pct ?? 0))
     .slice(0, 6);
 
-  // Section B: Top 6 Fallers (dir === "down" sorted by lowest/most negative pct or biggest drop)
+  
   const fallers = products
     .filter((p) => p.change?.dir === "down")
     .sort((a, b) => (a.change?.pct ?? 0) - (b.change?.pct ?? 0))
@@ -27,11 +27,11 @@ export default async function HomePage() {
 
   return (
     <div className="space-y-12 pb-20">
-      {/* 2. Hero / Banner */}
+   
       <Hero />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        {/* 3. Section A — “▲ আজ দাম বেড়েছে”: Top 6 risers matching Figma */}
+        
         <section>
           <div className="flex items-center gap-2 mb-4">
             <span className="text-red-600 text-sm font-bold">▲</span>
@@ -51,7 +51,7 @@ export default async function HomePage() {
           )}
         </section>
 
-        {/* 3. Section B — “▼ আজ দাম কমেছে”: Top 6 fallers matching Figma */}
+       
         <section>
           <div className="flex items-center gap-2 mb-4">
             <span className="text-emerald-700 text-sm font-bold">▼</span>
@@ -71,7 +71,7 @@ export default async function HomePage() {
           )}
         </section>
 
-        {/* 3. Section C — “সব পণ্য” with responsive grid */}
+        
         <section
           id="সব-পণ্য"
           className="scroll-mt-24 pt-4 border-t border-gray-100"

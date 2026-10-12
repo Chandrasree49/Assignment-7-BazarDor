@@ -40,7 +40,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
-      {/* Breadcrumb Navigation */}
+      
       <nav className="text-sm text-gray-500 flex items-center gap-2">
         <Link href="/" className="hover:text-green-700">হোম</Link>
         <span>/</span>
@@ -51,7 +51,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
         <span className="text-gray-900 font-medium">{product.nameBn}</span>
       </nav>
 
-      {/* Top — Summary Header matching Figma */}
+  
       <div className="bg-white rounded-3xl border border-gray-200 p-6 sm:p-8 shadow-sm">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-start gap-5">
@@ -85,7 +85,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
             </div>
           </div>
 
-          {/* Today's Benchmark Price */}
+   
           <div className="md:text-right bg-emerald-50 md:bg-transparent p-4 md:p-0 rounded-2xl border md:border-none border-emerald-100">
             <span className="text-xs font-semibold text-emerald-800 uppercase tracking-wider block">
               জাতীয় গড় আজকের দর
@@ -100,9 +100,9 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
         </div>
       </div>
 
-      {/* Price Summary Cards (Minimum, Maximum, Average) */}
+   
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        {/* Minimum Price */}
+      
         <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm hover:border-green-300 transition-colors">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold text-gray-600">সর্বনিম্ন দাম (Min)</span>
@@ -116,7 +116,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
           <p className="text-xs text-gray-400 mt-1">সকল বাজার যাচাই করে সর্বনিম্ন রেট</p>
         </div>
 
-        {/* Average Price */}
+        
         <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm hover:border-green-300 transition-colors">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold text-gray-600">গড় দাম (Average)</span>
@@ -130,7 +130,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
           <p className="text-xs text-gray-400 mt-1">জাতীয় বাজারের মধ্যবর্তী মূল্যমান</p>
         </div>
 
-        {/* Maximum Price */}
+        
         <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm hover:border-green-300 transition-colors">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold text-gray-600">সর্বোচ্চ দাম (Max)</span>
@@ -145,7 +145,6 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
         </div>
       </div>
 
-      {/* Historical Comparison Badges (Yesterday, Last Week, Last Month) */}
       <div className="bg-gradient-to-r from-gray-50 to-emerald-50/30 rounded-2xl p-5 border border-gray-200 flex flex-wrap items-center justify-between gap-4">
         <span className="text-sm font-bold text-gray-700">পূর্ববর্তী মূল্য তুলনা:</span>
         <div className="flex flex-wrap gap-4 text-xs sm:text-sm">
@@ -164,7 +163,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
         </div>
       </div>
 
-      {/* বাজারভিত্তিক আজকের দাম (Market-wise Prices Table / Grid) */}
+ 
       <div className="bg-white rounded-3xl border border-gray-200 p-6 sm:p-8 shadow-sm space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
           <div>
@@ -176,7 +175,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
             </p>
           </div>
 
-          {/* Division filter */}
+     
           <div className="flex items-center gap-2">
             <label htmlFor="div-filter" className="text-xs font-semibold text-gray-500 whitespace-nowrap">বিভাগ ফিল্টার:</label>
             <select
@@ -194,7 +193,6 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
           </div>
         </div>
 
-        {/* Table representation */}
         <div className="overflow-x-auto">
           <table className="table w-full text-left">
             <thead>

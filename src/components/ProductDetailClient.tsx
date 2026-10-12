@@ -73,7 +73,7 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
-      {/* 1. Breadcrumb: হোম > চাল > বাটাম সাইজ চাল */}
+
       <nav className="text-xs text-gray-500 flex items-center gap-2">
         <Link href="/" className="hover:text-emerald-700">হোম</Link>
         <span>&gt;</span>
@@ -84,7 +84,7 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
         <span className="text-gray-900 font-medium">{product.nameBn}</span>
       </nav>
 
-      {/* 2. Top Summary Card matching Figma */}
+      
       <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="flex items-center gap-5">
           <div className="w-16 h-16 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center text-3xl select-none shrink-0">
@@ -103,7 +103,7 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
           </div>
         </div>
 
-        {/* Right Benchmark Box matching Figma */}
+       
         <div className="bg-gray-50/70 border border-gray-100 rounded-2xl px-6 py-4 text-center min-w-[130px] self-start md:self-auto">
           <span className="text-[11px] text-gray-400 block font-normal">আজকের দাম</span>
           <div className="text-3xl font-black text-gray-900 leading-tight mt-0.5">
@@ -119,15 +119,15 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
         </div>
       </div>
 
-      {/* 3. Main Details Box: দামের সারসংক্ষেপ & বাজারভিত্তিক আজকের দাম */}
+    
       <div className="bg-white rounded-2xl border border-gray-100 p-6 sm:p-8 shadow-xs space-y-8">
-        {/* Sub-heading: দামের সারসংক্ষেপ */}
+        
         <div>
           <h2 className="text-sm font-bold text-gray-900 mb-3">
             দামের সারসংক্ষেপ
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* সর্বনিন্ম দাম */}
+      
             <div className="border border-gray-100 rounded-xl p-4 bg-white shadow-2xs">
               <span className="text-xs text-gray-400 block">সর্বনিন্ম দাম</span>
               <div className="text-xl font-black text-emerald-600 mt-1">
@@ -136,7 +136,7 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
               <p className="text-[11px] text-gray-400 mt-1">সবচেয়ে কম দামের বাজার</p>
             </div>
 
-            {/* সর্বাধিক দাম */}
+    
             <div className="border border-gray-100 rounded-xl p-4 bg-white shadow-2xs">
               <span className="text-xs text-gray-400 block">সর্বাধিক দাম</span>
               <div className="text-xl font-black text-red-600 mt-1">
@@ -145,7 +145,7 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
               <p className="text-[11px] text-gray-400 mt-1">সবচেয়ে বেশি দামের বাজার</p>
             </div>
 
-            {/* গড় দাম */}
+        
             <div className="border border-gray-100 rounded-xl p-4 bg-white shadow-2xs">
               <span className="text-xs text-gray-400 block">গড় দাম</span>
               <div className="text-xl font-black text-emerald-600 mt-1">
@@ -158,7 +158,6 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
           </div>
         </div>
 
-        {/* Sub-heading: বাজারভিত্তিক আজকের দাম Table matching Figma */}
         <div>
           <h2 className="text-sm font-bold text-gray-900 mb-3">
             বাজারভিত্তিক আজকের দাম

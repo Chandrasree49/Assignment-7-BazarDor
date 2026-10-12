@@ -28,7 +28,6 @@ export default function Navbar({ categories, products }: NavbarProps) {
     setBanglaDate(getBengaliDate());
   }, []);
 
-  // Close dropdown on outside click
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -53,10 +52,10 @@ export default function Navbar({ categories, products }: NavbarProps) {
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-xs">
-      {/* 1. Top Bar: Logo + Date & User Dropdown matching Figma */}
+  
       <div className="border-b border-gray-100/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-          {/* Logo with Green Box + Title & Date */}
+        
           <Link href="/" className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-600 text-white shadow-xs">
               <Image
@@ -75,7 +74,7 @@ export default function Navbar({ categories, products }: NavbarProps) {
             </div>
           </Link>
 
-          {/* Right: User Profile with Popover Dropdown matching Figma */}
+         
           <div className="hidden sm:flex items-center gap-3">
             {isPending ? (
               <div className="skeleton h-8 w-24 rounded-full" />
@@ -105,7 +104,7 @@ export default function Navbar({ categories, products }: NavbarProps) {
                   </span>
                 </button>
 
-                {/* Figma Dropdown Menu */}
+            
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-white p-4 shadow-xl border border-gray-100 z-50 animate-in fade-in zoom-in-95 duration-100">
                     <div className="border-b border-gray-100 pb-3 mb-3">
@@ -156,7 +155,6 @@ export default function Navbar({ categories, products }: NavbarProps) {
             )}
           </div>
 
-          {/* Mobile hamburger */}
           <button
             className="sm:hidden p-2 rounded-lg text-gray-600"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -173,7 +171,7 @@ export default function Navbar({ categories, products }: NavbarProps) {
         </div>
       </div>
 
-      {/* 2. Middle Row: Category Links (Figma Clean Tab Style) */}
+ 
       <div className="border-b border-gray-100 overflow-x-auto scrollbar-hide bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="flex items-center gap-6 h-11 min-w-max">
@@ -201,7 +199,7 @@ export default function Navbar({ categories, products }: NavbarProps) {
         </div>
       </div>
 
-      {/* 3. Ticker: Light Background & Figma Dot/Color Pill Styling */}
+    
       <div className="bg-[#f3f4f6]/90 border-b border-gray-200/70 text-gray-700 text-xs py-2 overflow-hidden select-none">
         <div className="marquee-track">
           {[...products, ...products].map((p, i) => {
@@ -247,7 +245,7 @@ export default function Navbar({ categories, products }: NavbarProps) {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      
       {menuOpen && (
         <div className="sm:hidden bg-white border-t border-gray-100 px-4 py-3 space-y-2">
           {isPending ? null : session?.user ? (

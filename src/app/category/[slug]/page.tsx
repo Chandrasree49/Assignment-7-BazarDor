@@ -21,7 +21,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   const category = categories.find((c) => c.slug === slug || c.id === slug);
 
-  // If invalid slug, trigger 404
+ 
   if (!category) {
     notFound();
   }

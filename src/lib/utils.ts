@@ -1,6 +1,4 @@
-/**
- * Convert Western Arabic numerals to Eastern Arabic (Bengali) numerals
- */
+
 export function toBengaliDigits(num: number | string): string {
   const bengaliDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
   return String(num)
@@ -8,17 +6,12 @@ export function toBengaliDigits(num: number | string): string {
     .replace(/,/g, ","); // keep comma separator
 }
 
-/**
- * Format price with commas and convert to Bengali digits
- */
+
 export function formatPriceBn(price: number): string {
   const formatted = price.toLocaleString("en-IN");
   return toBengaliDigits(formatted);
 }
 
-/**
- * Get Bengali unit label
- */
 export function getUnitLabel(unit: string): string {
   const map: Record<string, string> = {
     kg: "প্রতি কেজি",
@@ -29,9 +22,6 @@ export function getUnitLabel(unit: string): string {
   return map[unit] ?? `প্রতি ${unit}`;
 }
 
-/**
- * Get current Bengali date string
- */
 export function getBengaliDate(): string {
   const now = new Date();
   const day = now.getDate();
@@ -47,25 +37,18 @@ export function getBengaliDate(): string {
   return `${toBengaliDigits(day)} ${months[month]}, ${toBengaliDigits(year)}`;
 }
 
-/**
- * Calculate average market price
- */
+
 export function calcAverage(markets: { min: number; max: number }[]): number {
   if (!markets.length) return 0;
   const total = markets.reduce((sum, m) => sum + (m.min + m.max) / 2, 0);
   return Math.round(total / markets.length);
 }
 
-/**
- * Get overall min price across markets
- */
 export function calcMin(markets: { min: number }[]): number {
   return Math.min(...markets.map((m) => m.min));
 }
 
-/**
- * Get overall max price across markets
- */
+
 export function calcMax(markets: { max: number }[]): number {
   return Math.max(...markets.map((m) => m.max));
 }

@@ -75,7 +75,7 @@ export default function ProfilePage() {
 
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10 space-y-6">
-      {/* Page Header */}
+    
       <div>
         <h1 className="text-2xl font-black text-gray-900 tracking-tight">
           আমার প্রোফাইল
@@ -85,7 +85,7 @@ export default function ProfilePage() {
         </p>
       </div>
 
-      {/* Card 1: User Info Banner matching Figma */}
+     
       <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-xs flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div className="w-14 h-14 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 flex items-center justify-center text-gray-700 font-bold text-lg shrink-0">
@@ -109,7 +109,7 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {/* Red Outline Signout Button matching Figma */}
+       
         <button
           onClick={handleSignOut}
           className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl border border-red-200 text-red-500 hover:bg-red-50 text-xs font-semibold transition-colors"
@@ -119,7 +119,6 @@ export default function ProfilePage() {
         </button>
       </div>
 
-      {/* Card 2: Update Information Form matching Figma */}
       <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-xs space-y-4">
         <h3 className="text-sm font-bold text-gray-900">
           তথ্য

@@ -49,7 +49,7 @@ export default function SignUpPage() {
         toast.error(errorText);
       } else {
         toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে! অনুগ্রহ করে লগইন করুন।");
-        // Requirement 6: "If the user Register successfully then navigate him to his login page."
+        
         router.push(
           `/signin${
             callbackUrl !== "/"
@@ -85,7 +85,7 @@ export default function SignUpPage() {
   return (
     <div className="min-h-[75vh] flex items-center justify-center px-4 py-12">
       <div className="max-w-md w-full bg-white rounded-3xl border border-gray-200 p-8 shadow-sm space-y-6">
-        {/* Title */}
+      
         <div className="text-center space-y-1">
           <div className="text-4xl mb-2 select-none">📝</div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900">
@@ -96,14 +96,13 @@ export default function SignUpPage() {
           </p>
         </div>
 
-        {/* Error message */}
         {errorMessage && (
           <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs sm:text-sm rounded-xl">
             {errorMessage}
           </div>
         )}
 
-        {/* Form */}
+       
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-xs font-semibold text-gray-700 mb-1">
@@ -160,10 +159,10 @@ export default function SignUpPage() {
           </button>
         </form>
 
-        {/* Divider */}
+       
         <div className="divider text-xs text-gray-400">অথবা</div>
 
-        {/* Social Logins */}
+  
         <div className="space-y-2">
           <button
             type="button"
@@ -207,7 +206,6 @@ export default function SignUpPage() {
           </button>
         </div>
 
-        {/* Link to Login */}
         <div className="text-center text-xs sm:text-sm text-gray-500 pt-2">
           অ্যাকাউন্ট আছে?{" "}
           <Link
@@ -222,7 +220,7 @@ export default function SignUpPage() {
           </Link>
         </div>
 
-        {/* Back to Home Link matching Figma */}
+       
         <div className="text-center pt-2">
           <Link
             href="/"
